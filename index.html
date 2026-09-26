@@ -148,8 +148,11 @@
     <p>
       Sigo App está dirigida exclusivamente a personas de <strong>16 años o
       más</strong>. Este requisito se aplica a todas las cuentas, incluidas las
-      cuentas empresariales. No recopilamos conscientemente datos de menores de
-      16 años. Si detectamos o se nos notifica que una cuenta pertenece a un
+      cuentas empresariales. Esta comprobación se basa en la fecha de
+      nacimiento que nos declarás al registrarte: hoy no realizamos una
+      verificación de edad independiente. No recopilamos conscientemente datos
+      de menores de 16 años. Si detectamos o se nos notifica que una cuenta
+      pertenece a un
       menor de 16 años, la suspenderemos y eliminaremos sus datos.
       Si sos madre, padre o tutor y creés que un menor a tu cargo nos facilitó
       datos, escribinos a la dirección de la <a href="#contacto">sección 16</a>.
@@ -224,7 +227,8 @@
         El número de documento se solicita para verificar la unicidad de la
         cuenta y prevenir la suplantación de identidad y la creación masiva de
         cuentas fraudulentas. <strong>No se comparte con otros usuarios ni se
-        muestra en tu perfil público</strong>, y se almacena cifrado.
+        muestra en tu perfil público</strong>, y se almacena con acceso
+        restringido, únicamente para el personal que necesita consultarlo.
       </p>
     </div>
 
@@ -290,9 +294,9 @@
     <h4>Llamadas de voz, videollamadas y modo Walkie-Talkie</h4>
     <p>
       Estas comunicaciones se transmiten mediante WebRTC con
-      <strong>cifrado de extremo a extremo</strong>: se genera una clave
-      criptográfica distinta para cada llamada y el audio y el vídeo se cifran
-      en tu dispositivo antes de salir de él.
+      <strong>cifrado en tránsito</strong> (protocolo estándar DTLS-SRTP): el
+      audio y el vídeo viajan cifrados en todo momento entre tu dispositivo y
+      los demás participantes.
       <strong>No grabamos ni almacenamos el contenido de las llamadas.</strong>
       Conservamos únicamente metadatos: participantes, fecha, hora, duración y
       estado (contestada, perdida, rechazada).
@@ -482,7 +486,7 @@
           <tr><td><strong>Google (Speech-to-Text)</strong></td><td>Transcripción de voz</td><td>Audio que enviás a transcribir</td></tr>
           <tr><td><strong>Google (Gmail API)</strong></td><td>Integración de correo (opcional)</td><td>Correo de la cuenta que conectes</td></tr>
           <tr><td><strong>Microsoft (Graph API)</strong></td><td>Integración de correo Outlook (opcional)</td><td>Correo de la cuenta que conectes</td></tr>
-          <tr><td><strong>LiveKit</strong></td><td>Infraestructura de llamadas y videollamadas</td><td>Metadatos de señalización; <strong>no accede al contenido</strong>, cifrado de extremo a extremo</td></tr>
+          <tr><td><strong>LiveKit</strong></td><td>Infraestructura de llamadas y videollamadas</td><td>Metadatos de señalización; <strong>no accede al contenido</strong>, que viaja cifrado en tránsito (WebRTC/DTLS-SRTP)</td></tr>
           <tr><td><strong>Backblaze B2</strong></td><td>Almacenamiento de archivos multimedia</td><td>Archivos que enviás o publicás</td></tr>
           <tr><td><strong>Twilio</strong></td><td>Envío de SMS de verificación</td><td>Número de teléfono</td></tr>
           <tr><td><strong>Brevo</strong></td><td>Envío de correo transaccional</td><td>Dirección de correo</td></tr>
@@ -518,7 +522,7 @@
     <ul>
       <li><strong>Cifrado en tránsito:</strong> todo el tráfico entre la aplicación y nuestros servidores viaja sobre TLS. La aplicación no acepta conexiones sin cifrar.</li>
       <li><strong>Cifrado en reposo:</strong> el contenido de los mensajes y los tokens de las cuentas de correo se almacenan cifrados con AES-256.</li>
-      <li><strong>Cifrado de extremo a extremo</strong> en llamadas de voz, videollamadas y Walkie-Talkie, con una clave única para cada llamada.</li>
+      <li><strong>Cifrado en tránsito (WebRTC/DTLS-SRTP)</strong> en llamadas de voz, videollamadas y Walkie-Talkie: el audio y el vídeo viajan cifrados en todo momento.</li>
       <li><strong>Contraseñas</strong> guardadas con <em>hash</em> y sal; nunca en forma reversible.</li>
       <li><strong>En tu dispositivo:</strong> los tokens de sesión y las credenciales se guardan cifrados mediante el almacén de claves del sistema operativo, y quedan excluidos de las copias de seguridad en la nube.</li>
     </ul>
@@ -551,15 +555,6 @@
         </tbody>
       </table>
     </div>
-
-    <p>
-      <strong>Cuentas inactivas.</strong> Si una cuenta permanece sin actividad
-      durante <strong>seis (6) meses continuos</strong>, te enviaremos un aviso
-      al correo o teléfono registrado. Si transcurridos
-      <strong>treinta (30) días</strong> desde ese aviso la cuenta sigue
-      inactiva, le aplicaremos el mismo proceso descrito en la
-      <a href="#eliminacion">sección 11</a>.
-    </p>
 
     <p>
       Tras una eliminación, los datos pueden permanecer hasta
@@ -627,7 +622,7 @@
     <ul>
       <li><strong>Desde la aplicación:</strong> pestaña <em>Descubrir</em> → <em>Yo</em> → <em>Eliminar cuenta</em>.</li>
       <li><strong>Desde la web, sin necesidad de tener la app instalada:</strong> <a href="eliminar-cuenta.html">página de eliminación de cuenta</a>.</li>
-      <li><strong>Por correo:</strong> escribiendo a <a href="mailto:privacidad@sigoexpress.app">privacidad@sigoexpress.app</a>.</li>
+      <li><strong>Por correo:</strong> escribiendo a <a href="mailto:sigo_soporte@gmail.com">sigo_soporte@gmail.com</a>.</li>
     </ul>
 
     <h3 id="eliminacion-proceso">11.1 Qué ocurre cuando lo pedís</h3>
@@ -635,9 +630,9 @@
     <p>
       <strong>De inmediato.</strong> Tu cuenta queda desactivada. Cerramos todas
       tus sesiones, dejás de recibir notificaciones y no podés volver a iniciar
-      sesión, ni con contraseña ni con Google o Facebook. Desconectamos también
-      las cuentas de correo externas que tuvieras vinculadas y dejamos de
-      sincronizar tu bandeja.
+      sesión, ni con contraseña, ni con huella, ni con Google o Facebook.
+      Desconectamos también las cuentas de correo externas que tuvieras
+      vinculadas y dejamos de sincronizar tu bandeja.
     </p>
 
     <p>
@@ -751,7 +746,7 @@
           <tr><td>Revocar un permiso (ubicación, cámara, micrófono, notificaciones)</td><td>Ajustes del sistema operativo → Aplicaciones → Sigo App → Permisos</td></tr>
           <tr><td>Desconectar tu cuenta de correo</td><td>Sigo App → Correo → botón «Desconectar»</td></tr>
           <tr><td>Borrar el historial del asistente de IA</td><td>Sigo App → Täbu → lista de conversaciones → eliminar</td></tr>
-          <tr><td>Descargar tus datos</td><td>Escribinos a <a href="mailto:privacidad@sigoexpress.app">privacidad@sigoexpress.app</a></td></tr>
+          <tr><td>Descargar tus datos</td><td>Escribinos a <a href="mailto:sigo_soporte@gmail.com">sigo_soporte@gmail.com</a></td></tr>
           <tr><td>Eliminar tu cuenta</td><td>Sigo App → <em>Descubrir</em> → <em>Yo</em> → <em>Eliminar cuenta</em>, o la <a href="eliminar-cuenta.html">página web</a></td></tr>
         </tbody>
       </table>
@@ -802,7 +797,7 @@
         <dd>Adria ferran<br>21 5 a<br>Palma de Mallorca - 0707<br>Noruega (NO)</dd>
 
         <dt>Privacidad</dt>
-        <dd><a href="mailto:privacidad@sigoexpress.app">privacidad@sigoexpress.app</a></dd>
+        <dd><a href="mailto:sigo_soporte@gmail.com">sigo_soporte@gmail.com</a></dd>
 
         <dt>Delegado de Protección de Datos</dt>
         <dd><a href="mailto:dpo@sigoexpress.app">dpo@sigoexpress.app</a></dd>

@@ -146,8 +146,11 @@
     <p>
       Sigo App s'adresse exclusivement aux personnes âgées de <strong>16 ans ou
       plus</strong>. Cette exigence s'applique à tous les comptes, y compris les
-      comptes professionnels. Nous ne collectons pas sciemment les données de
-      personnes de moins de 16 ans. Si nous détectons, ou si l'on nous signale,
+      comptes professionnels. Cette vérification repose sur la date de
+      naissance que vous déclarez lors de l'inscription : nous ne réalisons pas
+      aujourd'hui de vérification d'âge indépendante. Nous ne collectons pas
+      sciemment les données de personnes de moins de 16 ans. Si nous détectons,
+      ou si l'on nous signale,
       qu'un compte appartient à une personne de moins de 16 ans, nous le
       suspendons et supprimons ses données. Si vous êtes parent ou tuteur et que
       vous pensez qu'un mineur dont vous avez la charge nous a fourni des
@@ -223,7 +226,8 @@
         compte et prévenir l'usurpation d'identité et la création massive de
         comptes frauduleux. <strong>Il n'est pas partagé avec les autres
         utilisateurs et n'apparaît pas sur votre profil public</strong>, et il
-        est stocké chiffré.
+        est stocké avec un accès restreint, limité au personnel qui doit le
+        consulter.
       </p>
     </div>
 
@@ -290,9 +294,9 @@
     <h4>Appels vocaux, appels vidéo et mode Talkie-walkie</h4>
     <p>
       Ces communications sont transmises via WebRTC avec un
-      <strong>chiffrement de bout en bout</strong> : une clé cryptographique
-      différente est générée pour chaque appel, et l'audio et la vidéo sont
-      chiffrés sur votre appareil avant d'en sortir.
+      <strong>chiffrement en transit</strong> (protocole standard DTLS-SRTP) :
+      l'audio et la vidéo circulent chiffrés à tout moment entre votre appareil
+      et les autres participants.
       <strong>Nous n'enregistrons ni ne stockons le contenu des appels.</strong>
       Nous ne conservons que des métadonnées : participants, date, heure, durée
       et statut (répondu, manqué, refusé).
@@ -485,7 +489,7 @@
           <tr><td><strong>Google (Speech-to-Text)</strong></td><td>Transcription vocale</td><td>Audio que vous envoyez à transcrire</td></tr>
           <tr><td><strong>Google (API Gmail)</strong></td><td>Intégration de messagerie (facultative)</td><td>Courriels du compte que vous connectez</td></tr>
           <tr><td><strong>Microsoft (API Graph)</strong></td><td>Intégration de messagerie Outlook (facultative)</td><td>Courriels du compte que vous connectez</td></tr>
-          <tr><td><strong>LiveKit</strong></td><td>Infrastructure d'appels et de visioconférence</td><td>Métadonnées de signalisation ; <strong>n'accède pas au contenu</strong>, chiffré de bout en bout</td></tr>
+          <tr><td><strong>LiveKit</strong></td><td>Infrastructure d'appels et de visioconférence</td><td>Métadonnées de signalisation ; <strong>n'accède pas au contenu</strong>, qui circule chiffré en transit (WebRTC/DTLS-SRTP)</td></tr>
           <tr><td><strong>Backblaze B2</strong></td><td>Stockage des fichiers multimédias</td><td>Fichiers que vous envoyez ou publiez</td></tr>
           <tr><td><strong>Twilio</strong></td><td>Envoi de SMS de vérification</td><td>Numéro de téléphone</td></tr>
           <tr><td><strong>Brevo</strong></td><td>Envoi d'e-mails transactionnels</td><td>Adresse e-mail</td></tr>
@@ -521,7 +525,7 @@
     <ul>
       <li><strong>Chiffrement en transit :</strong> tout le trafic entre l'application et nos serveurs circule en TLS. L'application n'accepte pas de connexions non chiffrées.</li>
       <li><strong>Chiffrement au repos :</strong> le contenu des messages et les jetons des comptes de messagerie sont stockés chiffrés en AES-256.</li>
-      <li><strong>Chiffrement de bout en bout</strong> pour les appels vocaux, les appels vidéo et le Talkie-walkie, avec une clé unique pour chaque appel.</li>
+      <li><strong>Chiffrement en transit (WebRTC/DTLS-SRTP)</strong> pour les appels vocaux, les appels vidéo et le Talkie-walkie : l'audio et la vidéo circulent chiffrés à tout moment.</li>
       <li><strong>Mots de passe</strong> stockés sous forme de <em>hash</em> avec sel ; jamais sous forme réversible.</li>
       <li><strong>Sur votre appareil :</strong> les jetons de session et les identifiants sont stockés chiffrés via le magasin de clés du système d'exploitation, et sont exclus des sauvegardes cloud.</li>
     </ul>
@@ -553,14 +557,6 @@
         </tbody>
       </table>
     </div>
-
-    <p>
-      <strong>Comptes inactifs.</strong> Si un compte reste sans activité pendant
-      <strong>six (6) mois consécutifs</strong>, nous enverrons un avis à
-      l'e-mail ou au téléphone enregistré. Si, <strong>trente (30) jours</strong>
-      après cet avis, le compte est toujours inactif, nous lui appliquerons le même
-      processus décrit à la <a href="#eliminacion">section 11</a>.
-    </p>
 
     <p>
       Après une suppression, les données peuvent subsister jusqu'à
@@ -625,7 +621,7 @@
     <ul>
       <li><strong>Depuis l'application :</strong> onglet <em>Découvrir</em> → <em>Moi</em> → <em>Supprimer le compte</em>.</li>
       <li><strong>Depuis le web, sans avoir besoin de l'application :</strong> <a href="suppression-compte.html">page de suppression de compte</a>.</li>
-      <li><strong>Par e-mail :</strong> en écrivant à <a href="mailto:privacidad@sigoexpress.app">privacidad@sigoexpress.app</a>.</li>
+      <li><strong>Par e-mail :</strong> en écrivant à <a href="mailto:sigo_soporte@gmail.com">sigo_soporte@gmail.com</a>.</li>
     </ul>
 
     <h3 id="eliminacion-proceso">11.1 Ce qui se passe lorsque vous en faites la demande</h3>
@@ -633,9 +629,10 @@
     <p>
       <strong>Immédiatement.</strong> Votre compte est désactivé. Nous fermons
       toutes vos sessions, vous ne recevez plus de notifications et vous ne pouvez
-      plus vous connecter, ni par mot de passe ni via Google ou Facebook. Nous
-      déconnectons également les comptes de messagerie externes que vous aviez
-      liés et cessons de synchroniser votre boîte de réception.
+      plus vous connecter, ni par mot de passe, ni par empreinte digitale, ni
+      via Google ou Facebook. Nous déconnectons également les comptes de
+      messagerie externes que vous aviez liés et cessons de synchroniser votre
+      boîte de réception.
     </p>
 
     <p>
@@ -750,7 +747,7 @@
           <tr><td>Révoquer une autorisation (localisation, caméra, microphone, notifications)</td><td>Paramètres du système → Applications → Sigo App → Autorisations</td></tr>
           <tr><td>Déconnecter votre compte de messagerie</td><td>Sigo App → Courrier → bouton « Déconnecter »</td></tr>
           <tr><td>Effacer l'historique de l'assistant IA</td><td>Sigo App → Täbu → liste des conversations → supprimer</td></tr>
-          <tr><td>Télécharger vos données</td><td>Écrivez-nous à <a href="mailto:privacidad@sigoexpress.app">privacidad@sigoexpress.app</a></td></tr>
+          <tr><td>Télécharger vos données</td><td>Écrivez-nous à <a href="mailto:sigo_soporte@gmail.com">sigo_soporte@gmail.com</a></td></tr>
           <tr><td>Supprimer votre compte</td><td>Sigo App → <em>Découvrir</em> → <em>Moi</em> → <em>Supprimer le compte</em>, ou la <a href="suppression-compte.html">page web</a></td></tr>
         </tbody>
       </table>
@@ -797,7 +794,7 @@
         <dd>Adria ferran<br>21 5 a<br>Palma de Mallorca - 0707<br>Norvège (NO)</dd>
 
         <dt>Confidentialité</dt>
-        <dd><a href="mailto:privacidad@sigoexpress.app">privacidad@sigoexpress.app</a></dd>
+        <dd><a href="mailto:sigo_soporte@gmail.com">sigo_soporte@gmail.com</a></dd>
 
         <dt>Délégué à la protection des données</dt>
         <dd><a href="mailto:dpo@sigoexpress.app">dpo@sigoexpress.app</a></dd>

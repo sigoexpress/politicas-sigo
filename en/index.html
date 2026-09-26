@@ -143,7 +143,9 @@
 
     <p>
       Sigo App is intended exclusively for people aged <strong>16 or over</strong>.
-      This requirement applies to all accounts, including business accounts. We
+      This requirement applies to all accounts, including business accounts.
+      This check is based on the date of birth you declare when registering:
+      we do not currently carry out independent age verification. We
       do not knowingly collect data from anyone under 16. If we detect, or are
       notified, that an account belongs to someone under 16, we will suspend it
       and delete its data. If you are a parent or guardian and believe a minor
@@ -218,7 +220,8 @@
         The document number is requested to verify that each account is unique
         and to prevent identity fraud and the mass creation of fraudulent
         accounts. <strong>It is not shared with other users and is not shown on
-        your public profile</strong>, and it is stored encrypted.
+        your public profile</strong>, and it is stored with restricted access,
+        limited to staff who need to consult it.
       </p>
     </div>
 
@@ -282,9 +285,9 @@
     <h4>Voice calls, video calls and Walkie-Talkie mode</h4>
     <p>
       These communications are transmitted over WebRTC with
-      <strong>end-to-end encryption</strong>: a different cryptographic key is
-      generated for each call, and audio and video are encrypted on your device
-      before they leave it.
+      <strong>encryption in transit</strong> (the standard DTLS-SRTP protocol):
+      audio and video travel encrypted at all times between your device and
+      the other participants.
       <strong>We do not record or store the content of calls.</strong> We keep
       only metadata: participants, date, time, duration and status (answered,
       missed, declined).
@@ -470,7 +473,7 @@
           <tr><td><strong>Google (Speech-to-Text)</strong></td><td>Voice transcription</td><td>Audio you send for transcription</td></tr>
           <tr><td><strong>Google (Gmail API)</strong></td><td>Email integration (optional)</td><td>Email from the account you connect</td></tr>
           <tr><td><strong>Microsoft (Graph API)</strong></td><td>Outlook email integration (optional)</td><td>Email from the account you connect</td></tr>
-          <tr><td><strong>LiveKit</strong></td><td>Call and video call infrastructure</td><td>Signalling metadata; <strong>it does not access the content</strong>, which is end-to-end encrypted</td></tr>
+          <tr><td><strong>LiveKit</strong></td><td>Call and video call infrastructure</td><td>Signalling metadata; <strong>it does not access the content</strong>, which travels encrypted in transit (WebRTC/DTLS-SRTP)</td></tr>
           <tr><td><strong>Backblaze B2</strong></td><td>Media file storage</td><td>Files you send or publish</td></tr>
           <tr><td><strong>Twilio</strong></td><td>Sending verification SMS</td><td>Phone number</td></tr>
           <tr><td><strong>Brevo</strong></td><td>Sending transactional email</td><td>Email address</td></tr>
@@ -503,7 +506,7 @@
     <ul>
       <li><strong>Encryption in transit:</strong> all traffic between the app and our servers travels over TLS. The app does not accept unencrypted connections.</li>
       <li><strong>Encryption at rest:</strong> message content and email account tokens are stored encrypted with AES-256.</li>
-      <li><strong>End-to-end encryption</strong> on voice calls, video calls and Walkie-Talkie, with a unique key for each call.</li>
+      <li><strong>Encryption in transit (WebRTC/DTLS-SRTP)</strong> on voice calls, video calls and Walkie-Talkie: audio and video travel encrypted at all times.</li>
       <li><strong>Passwords</strong> stored hashed and salted; never in reversible form.</li>
       <li><strong>On your device:</strong> session tokens and credentials are stored encrypted through the operating system's keystore, and are excluded from cloud backups.</li>
     </ul>
@@ -535,14 +538,6 @@
         </tbody>
       </table>
     </div>
-
-    <p>
-      <strong>Inactive accounts.</strong> If an account remains inactive for
-      <strong>six (6) continuous months</strong>, we will send a notice to the
-      registered email or phone number. If <strong>thirty (30) days</strong>
-      after that notice the account is still inactive, we will apply the same process
-      described in <a href="#eliminacion">section 11</a>.
-    </p>
 
     <p>
       After deletion, data may remain for up to <strong>30 days</strong> in
@@ -605,7 +600,7 @@
     <ul>
       <li><strong>From the app:</strong> <em>Discover</em> tab → <em>Me</em> → <em>Delete account</em>.</li>
       <li><strong>From the web, without needing the app installed:</strong> <a href="delete-account.html">account deletion page</a>.</li>
-      <li><strong>By email:</strong> writing to <a href="mailto:privacidad@sigoexpress.app">privacidad@sigoexpress.app</a>.</li>
+      <li><strong>By email:</strong> writing to <a href="mailto:sigo_soporte@gmail.com">sigo_soporte@gmail.com</a>.</li>
     </ul>
 
     <h3 id="eliminacion-proceso">11.1 What happens when you request it</h3>
@@ -613,9 +608,9 @@
     <p>
       <strong>Immediately.</strong> Your account is deactivated. We close all
       your sessions, you stop receiving notifications, and you can no longer sign
-      in — neither with a password nor with Google or Facebook. We also
-      disconnect any external email accounts you had linked and stop
-      synchronising your inbox.
+      in — not with a password, not with your fingerprint, and not with Google
+      or Facebook. We also disconnect any external email accounts you had
+      linked and stop synchronising your inbox.
     </p>
 
     <p>
@@ -728,7 +723,7 @@
           <tr><td>Revoke a permission (location, camera, microphone, notifications)</td><td>Operating system settings → Apps → Sigo App → Permissions</td></tr>
           <tr><td>Disconnect your email account</td><td>Sigo App → Mail → "Disconnect" button</td></tr>
           <tr><td>Clear the AI assistant history</td><td>Sigo App → Täbu → conversation list → delete</td></tr>
-          <tr><td>Download your data</td><td>Write to us at <a href="mailto:privacidad@sigoexpress.app">privacidad@sigoexpress.app</a></td></tr>
+          <tr><td>Download your data</td><td>Write to us at <a href="mailto:sigo_soporte@gmail.com">sigo_soporte@gmail.com</a></td></tr>
           <tr><td>Delete your account</td><td>Sigo App → <em>Discover</em> → <em>Me</em> → <em>Delete account</em>, or the <a href="delete-account.html">web page</a></td></tr>
         </tbody>
       </table>
@@ -772,7 +767,7 @@
         <dd>Adria ferran<br>21 5 a<br>Palma de Mallorca - 0707<br>Norway (NO)</dd>
 
         <dt>Privacy</dt>
-        <dd><a href="mailto:privacidad@sigoexpress.app">privacidad@sigoexpress.app</a></dd>
+        <dd><a href="mailto:sigo_soporte@gmail.com">sigo_soporte@gmail.com</a></dd>
 
         <dt>Data Protection Officer</dt>
         <dd><a href="mailto:dpo@sigoexpress.app">dpo@sigoexpress.app</a></dd>
